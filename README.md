@@ -1,1 +1,1 @@
-Dont use the old scripts. Use the V2
+Dont use the old scripts.
