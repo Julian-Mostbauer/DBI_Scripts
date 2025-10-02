@@ -1,0 +1,44 @@
+-- Destructive DDL: deletes all old tables and creates new ones
+DROP TABLE Shelf;
+DROP TABLE Book;
+DROP TABLE Customer;
+DROP TABLE Rental;
+
+CREATE TABLE Shelf (
+ShelfName VARCHAR2(100),
+Capacity number
+);
+
+-- QUICK FIX: USE ALTERS DIRECTLY UNDER TABLE CREATION
+-- ALTER TABLE SHELF DROP COLUMN DESCRIPTION;
+-- ALTER TABLE SHELF ADD Capacity NUMBER;
+
+CREATE TABLE Customer (
+FirstName VARCHAR2(100),
+LastName VARCHAR2(100),
+DateOfBirth DATE,
+libraryNumber NUMBER
+);
+
+-- ALTER TABLE CUSTOMER ADD FIRSTNAME VARCHAR2(100);
+
+CREATE TABLE Book (
+Isbn VARCHAR2(20),
+Title VARCHAR2(500),
+Subtitle VARCHAR2(500),
+AuthorLastName VARCHAR(100),
+ShelfName VARCHAR(100)
+);
+
+
+-- ALTER TABLE BOOK ADD SUBTITLE VARCHAR2(500);
+-- ALTER TABLE book MODIFY Title varchar2(500);
+
+
+CREATE TABLE Rental (
+CustomerLastName VARCHAR2(100),
+BookIsbn VARCHAR2(100),
+RentDate DATE,
+ReturnDate DATE
+);
+
