@@ -1,64 +1,62 @@
--- Insert Shelves
-INSERT INTO Shelf (ShelfName, Capacity) VALUES ('Fiction', 50);
-INSERT INTO Shelf (ShelfName, Capacity) VALUES ('Science', 40);
-INSERT INTO Shelf (ShelfName, Capacity) VALUES ('History', 30);
+-- ==== SAMPLE DATA ====
 
--- Insert Customers
-INSERT INTO Customer (FirstName, LastName, DateOfBirth, libraryNumber) 
-VALUES ('Alice', 'Smith', TO_DATE('1990-05-15', 'YYYY-MM-DD'), 1001);
-INSERT INTO Customer (FirstName, LastName, DateOfBirth, libraryNumber) 
-VALUES ('Bob', 'Johnson', TO_DATE('1985-07-22', 'YYYY-MM-DD'), 1002);
-INSERT INTO Customer (FirstName, LastName, DateOfBirth, libraryNumber) 
-VALUES ('Carol', 'Williams', TO_DATE('1992-11-03', 'YYYY-MM-DD'), 1003);
-INSERT INTO Customer (FirstName, LastName, DateOfBirth, libraryNumber) 
-VALUES ('David', 'Brown', TO_DATE('1978-03-09', 'YYYY-MM-DD'), 1004);
-INSERT INTO Customer (FirstName, LastName, DateOfBirth, libraryNumber) 
-VALUES ('Eve', 'Davis', TO_DATE('2000-01-28', 'YYYY-MM-DD'), 1005);
+-- Shelves
+INSERT INTO Shelf (Id, ShelfName, Capacity) VALUES (1, 'Fiction', 100);
+INSERT INTO Shelf (Id, ShelfName, Capacity) VALUES (2, 'Science', 50);
+INSERT INTO Shelf (Id, ShelfName, Capacity) VALUES (3, 'History', 75);
 
--- Insert Books (10 total)
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0001', 'The Great Escape', NULL, 'Miller', 'Fiction');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0002', 'Quantum Physics', 'An Introduction', 'Einstein', 'Science');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0003', 'World History', 'From Ancient to Modern', 'Thompson', 'History');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0004', 'Mystery Manor', NULL, 'Clark', 'Fiction');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0005', 'Genetics Explained', NULL, 'Watson', 'Science');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0006', 'The Roman Empire', NULL, 'Taylor', 'History');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0007', 'Adventures in Space', NULL, 'Hawkins', 'Fiction');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0008', 'Chemistry Basics', NULL, 'Curie', 'Science');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0009', 'Medieval Europe', NULL, 'Johnson', 'History');
-INSERT INTO Book (Isbn, Title, Subtitle, AuthorLastName, ShelfName) VALUES ('ISBN0010', 'Fantasy Tales', NULL, 'Anderson', 'Fiction');
+-- Customers
+INSERT INTO Customer (Id, FirstName, LastName, DateOfBirth, libraryNumber)
+VALUES (1, 'Alice', 'Smith', TO_DATE('1990-05-15','YYYY-MM-DD'), 1001);
+INSERT INTO Customer (Id, FirstName, LastName, DateOfBirth, libraryNumber)
+VALUES (2, 'Bob', 'Johnson', TO_DATE('1985-09-22','YYYY-MM-DD'), 1002);
+INSERT INTO Customer (Id, FirstName, LastName, DateOfBirth, libraryNumber)
+VALUES (3, 'Charlie', 'Brown', TO_DATE('2000-01-12','YYYY-MM-DD'), 1003);
+INSERT INTO Customer (Id, FirstName, LastName, DateOfBirth, libraryNumber)
+VALUES (4, 'Diana', 'Miller', TO_DATE('1995-11-03','YYYY-MM-DD'), 1004);
+INSERT INTO Customer (Id, FirstName, LastName, DateOfBirth, libraryNumber)
+VALUES (5, 'Ethan', 'Davis', TO_DATE('1978-04-30','YYYY-MM-DD'), 1005);
 
--- Insert Rentals
--- Finished = ReturnDate NOT NULL
--- Pending = ReturnDate NULL
+-- Books
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (1, '9780000001', 'The Lost World', 'A Dinosaur Tale', 'Crichton', 1);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (2, '9780000002', 'Brave New World', NULL, 'Huxley', 1);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (3, '9780000003', 'Cosmos', NULL, 'Sagan', 2);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (4, '9780000004', 'A Brief History of Time', NULL, 'Hawking', 2);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (5, '9780000005', 'The Selfish Gene', NULL, 'Dawkins', 2);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (6, '9780000006', 'Guns, Germs, and Steel', NULL, 'Diamond', 3);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (7, '9780000007', '1776', NULL, 'McCullough', 3);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (8, '9780000008', 'Team of Rivals', NULL, 'Goodwin', 3);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (9, '9780000009', 'Jurassic Park', NULL, 'Crichton', 1);
+INSERT INTO Book (Id, Isbn, Title, Subtitle, AuthorLastName, ShelfId)
+VALUES (10, '9780000010', 'The Martian', NULL, 'Weir', 1);
 
--- Customer 1 (Alice)
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Smith', 'ISBN0001', TO_DATE('2025-09-01', 'YYYY-MM-DD'), TO_DATE('2025-09-10', 'YYYY-MM-DD'));
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Smith', 'ISBN0002', TO_DATE('2025-09-15', 'YYYY-MM-DD'), NULL);
-
--- Customer 2 (Bob)
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Johnson', 'ISBN0003', TO_DATE('2025-08-20', 'YYYY-MM-DD'), TO_DATE('2025-08-30', 'YYYY-MM-DD'));
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Johnson', 'ISBN0004', TO_DATE('2025-09-12', 'YYYY-MM-DD'), NULL);
-
--- Customer 3 (Carol)
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Williams', 'ISBN0005', TO_DATE('2025-09-05', 'YYYY-MM-DD'), TO_DATE('2025-09-14', 'YYYY-MM-DD'));
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Williams', 'ISBN0006', TO_DATE('2025-09-18', 'YYYY-MM-DD'), NULL);
-
--- Customer 4 (David)
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Brown', 'ISBN0007', TO_DATE('2025-09-02', 'YYYY-MM-DD'), TO_DATE('2025-09-09', 'YYYY-MM-DD'));
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Brown', 'ISBN0008', TO_DATE('2025-09-16', 'YYYY-MM-DD'), NULL);
-
--- Customer 5 (Eve)
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Davis', 'ISBN0009', TO_DATE('2025-09-01', 'YYYY-MM-DD'), TO_DATE('2025-09-08', 'YYYY-MM-DD'));
-INSERT INTO Rental (CustomerLastName, BookIsbn, RentDate, ReturnDate) 
-VALUES ('Davis', 'ISBN0010', TO_DATE('2025-09-17', 'YYYY-MM-DD'), NULL);
-
-COMMIT;
+-- Rentals
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (1, 1, TO_DATE('2025-01-05','YYYY-MM-DD'), TO_DATE('2025-01-20','YYYY-MM-DD'));
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (1, 3, TO_DATE('2025-01-10','YYYY-MM-DD'), NULL);
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (2, 2, TO_DATE('2025-01-15','YYYY-MM-DD'), TO_DATE('2025-02-01','YYYY-MM-DD'));
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (2, 4, TO_DATE('2025-02-01','YYYY-MM-DD'), NULL);
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (3, 5, TO_DATE('2025-02-05','YYYY-MM-DD'), TO_DATE('2025-02-25','YYYY-MM-DD'));
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (3, 6, TO_DATE('2025-02-15','YYYY-MM-DD'), NULL);
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (4, 7, TO_DATE('2025-02-20','YYYY-MM-DD'), TO_DATE('2025-03-05','YYYY-MM-DD'));
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (4, 8, TO_DATE('2025-03-01','YYYY-MM-DD'), NULL);
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (5, 9, TO_DATE('2025-03-10','YYYY-MM-DD'), NULL);
+INSERT INTO Rental (CustomerId, BookId, RentDate, ReturnDate)
+VALUES (5, 10, TO_DATE('2025-03-12','YYYY-MM-DD'), NULL);
